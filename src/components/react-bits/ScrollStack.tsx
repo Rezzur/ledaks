@@ -16,7 +16,13 @@ export function ScrollStack({ items }: ScrollStackProps) {
           style={{ "--stack-index": index } as CSSProperties}
         >
           <div className="scroll-stack-card-copy">
-            <span className="scroll-stack-kicker">{item.name}</span>
+            <div className="scroll-stack-card-head">
+              <span className="scroll-stack-kicker">{item.name}</span>
+              <span className="scroll-stack-summary">
+                <strong>{item.metric}</strong>
+                <small>{item.caption}</small>
+              </span>
+            </div>
             <h3>{item.title}</h3>
             <p>{item.text}</p>
             <ul>
@@ -27,15 +33,6 @@ export function ScrollStack({ items }: ScrollStackProps) {
                 </li>
               ))}
             </ul>
-          </div>
-          <div className="scroll-stack-visual" aria-hidden="true">
-            <strong>{item.metric}</strong>
-            <small>{item.caption}</small>
-            <div>
-              <span />
-              <span />
-              <span />
-            </div>
           </div>
         </article>
       ))}
