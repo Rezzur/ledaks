@@ -1,0 +1,178 @@
+@keyframes orbit-one {
+  from {
+    transform: translate(-50%, -50%) rotate(-18deg) translateX(var(--orbit-radius)) rotate(18deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(342deg) translateX(var(--orbit-radius)) rotate(-342deg);
+  }
+}
+
+@keyframes orbit-two {
+  from {
+    transform: translate(-50%, -50%) rotate(54deg) translateX(var(--orbit-radius)) rotate(-54deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(414deg) translateX(var(--orbit-radius)) rotate(-414deg);
+  }
+}
+
+@keyframes orbit-three {
+  from {
+    transform: translate(-50%, -50%) rotate(126deg) translateX(var(--orbit-radius)) rotate(-126deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(486deg) translateX(var(--orbit-radius)) rotate(-486deg);
+  }
+}
+
+@keyframes orbit-four {
+  from {
+    transform: translate(-50%, -50%) rotate(198deg) translateX(var(--orbit-radius)) rotate(-198deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(558deg) translateX(var(--orbit-radius)) rotate(-558deg);
+  }
+}
+
+@keyframes orbit-five {
+  from {
+    transform: translate(-50%, -50%) rotate(270deg) translateX(var(--orbit-radius)) rotate(-270deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(630deg) translateX(var(--orbit-radius)) rotate(-630deg);
+  }
+}
+
+@keyframes shiny-sweep {
+  0%,
+  54%,
+  100% {
+    background-position: 120% 0;
+  }
+
+  72% {
+    background-position: -120% 0;
+  }
+}
+
+@keyframes ring-breathe {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.98);
+  }
+
+  50% {
+    opacity: 0.9;
+    transform: scale(1.03);
+  }
+}
+
+@keyframes scroll-velocity {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 10px));
+  }
+}
+
+@keyframes module-block-load {
+  from {
+    opacity: 0.52;
+    transform: translate3d(var(--module-x), var(--module-y), 0) scale(0.94);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes module-scene-focus {
+  0% {
+    opacity: 0.52;
+    transform: translateY(72px) scale(0.96);
+  }
+
+  56%,
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes scroll-stack-card-focus {
+  0% {
+    opacity: 0.68;
+    transform:
+      translateY(calc(42px + (var(--stack-index) * 12px)))
+      scale(0.97);
+  }
+
+  52%,
+  100% {
+    opacity: 1;
+    transform:
+      translateY(calc(var(--stack-index) * 12px))
+      scale(1);
+  }
+}
+
+.module-scene .module-block {
+  animation: module-block-load 900ms var(--ease-apple) both;
+  animation-delay: calc(var(--module-index) * 90ms);
+}
+
+.scroll-stack-card {
+  animation: scroll-stack-card-focus 760ms var(--ease-apple) both;
+}
+
+@supports (animation-timeline: view()) {
+  .module-scene {
+    animation: module-scene-focus both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 46%;
+  }
+
+  .module-scene .module-block {
+    animation: module-block-load both;
+    animation-delay: 0s;
+    animation-timeline: view();
+    animation-range: entry 12% cover 42%;
+  }
+
+  .scroll-stack-card {
+    animation: scroll-stack-card-focus both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 42%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .orbit-card {
+    animation: none !important;
+  }
+
+  .scroll-velocity-track {
+    animation: none !important;
+  }
+
+  .module-scene,
+  .module-scene .module-block,
+  .scroll-stack-card {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+}
